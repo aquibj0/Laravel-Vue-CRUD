@@ -2,7 +2,7 @@
 import { ref, onMounted, reactive } from 'vue';
 import axios from 'axios';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-import BlogCard from './BlogCard.vue';
+import BlogCard from './PostCard.vue';
 
 const state = reactive({
     posts: [],

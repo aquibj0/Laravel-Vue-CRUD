@@ -1,20 +1,11 @@
 
 
 <script setup>
-
 import Navbar from '/resources/js/src/components/Navbar.vue';
-
-
-// export default {
-//     name: "App",
-//     components: {
-//         Navbar, 
-//     },
-// };
+import { RouterView } from 'vue-router';
 </script>
-
 
 <template>
     <Navbar />
-    <router-view />
+    <RouterView/>
 </template>

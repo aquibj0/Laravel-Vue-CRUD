@@ -12,6 +12,13 @@
                     {{ __("You're logged in!") }}
                 </div>
             </div>
+            <div class="my-6">
+                <h1 class="text-4xl">Find Blogs Below</h1>
+            </div>
         </div>
     </div>
+
+    <primary-button></primary-button>
+   
+
 </x-app-layout>

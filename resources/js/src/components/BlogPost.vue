@@ -50,25 +50,22 @@ onMounted(fetchPost);
 
         <section v-if="!state.isLoading" class="">
             <div class="container m-auto py-10 px-6">
-                <div class="flex gap-6 conte">
-                    <div class="col-span-4	">
+                <div class="grid grid-cols-3 gap-4e">
+                    <div class="col-span-3">
                         <div class="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
                             <h1 class="text-3xl font-bold mb-4">{{ state.post.title }}</h1>
-
                         </div>
 
                         <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-
                             <p class="mb-4">
                                 {{ state.post.content }}
                             </p>
-
                         </div>
                     </div>
 
                     <!-- Sidebar -->
-                    <div class="col-span-8">
-                        <!-- Manage -->                        
+                    <div class="col-span-6">
+                        <!-- Manage -->
                         <div class="bg-white p-6 rounded-lg shadow-md mt-6">
                             <h3 class="text-xl font-bold mb-6">Manage Post</h3>
                             <RouterLink :to="`/posts/edit/${state.post.id}`"
