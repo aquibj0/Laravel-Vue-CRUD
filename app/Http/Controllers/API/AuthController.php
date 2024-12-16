@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-       /**
+    /**
     * Create user
     *
     * @param  [string] name
@@ -23,7 +23,6 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email'=>'required|string|unique:users',
             'password'=>'required|string',
-            'c_password' => 'required|same:password'
         ]);
 
         $user = new User([
@@ -54,7 +53,6 @@ class AuthController extends Controller
     * @param  [string] password
     * @param  [boolean] remember_me
     */
-
     public function login(Request $request){
         $request->validate([
             'email' => 'required|string|email',
@@ -95,22 +93,24 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Unauthorized'
         ],401);
+
     }
 
 
     /**
- * Logout user (Revoke the token)
-*
-* @return [string] message
-*/
-public function logout(Request $request) {
-    $request->user()->tokens()->delete();
+     * Logout user (Revoke the token)
+    *
+    * @return [string] message
+    */
+    public function logout(Request $request) {
+        
+        $request->user()->tokens()->delete();
 
-    return response()->json([
-        'message' => 'Successfully logged out'
-    ]);
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
 
-}
+    }
 
 
 }

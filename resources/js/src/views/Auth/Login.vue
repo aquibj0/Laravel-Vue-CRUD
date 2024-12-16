@@ -10,7 +10,7 @@ const toast = useToast();
 const form = reactive({
     email: '',
     password: '',
-    remember_me: ''
+    remember_me: false
 });
 
 
@@ -25,7 +25,10 @@ const handleLogin = async () => {
 
     try {
         const response = await axios.post('/api/auth/login', user);
-        sessionStorage.setItem('auth_token', response.data.token);
+        console.log(response.data);
+        console.log(response.data.accessToken);
+        sessionStorage.setItem('auth_token', response.data.accessToken);
+
         toast.success('Login Successfull')
         router.push(`/dashboard`);
     } catch (error) {

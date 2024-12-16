@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -36,5 +37,20 @@ class PostController extends Controller
     public function destroy(Post $post){
         $post->delete();
         return response()->noContent();
+    }
+
+
+    public function userPost($id){
+        if(Auth::check()){
+            $posts = Post::where('user_id', $id)->get();
+            return response()->json([
+                'message' => 'Success',
+                'posts' => $posts,
+            ], 201);
+        }
+        return response()->json([
+            'message' => 'Unauthorized'
+        ],401);
+
     }
 }
