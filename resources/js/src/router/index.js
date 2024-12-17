@@ -1,14 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { isAuthenticated } from "../../auth";
-import BlogIndex from "../components/BlogIndex.vue";
-import BlogCreate from "../components/BlogCreate.vue";
-import BlogEdit from "../components/BlogEdit.vue";
+// import BlogIndex from "../components/BlogIndex.vue";
+// import BlogCreate from "../components/BlogCreate.vue";
+// import BlogEdit from "../components/BlogEdit.vue";
 import BlogPost from "../components/BlogPost.vue";
 import HomeView from "../views/Home.vue";
 import Login from "../views/Auth/Login.vue";
 import Register from "../views/Auth/Register.vue";
 import NotFound from "../views/Error/404.vue";
 import Dashboard from "../views/User/Dashboard.vue";
+import PostCreate from "../views/User/Post/Create.vue";
+import PostEdit from "../views/User/Post/Edit.vue";
 import { useToast } from "vue-toastification";
 
 const routes = [
@@ -35,7 +37,7 @@ const routes = [
     },
     {
         path: "/dashboard/create",
-        component: BlogCreate,
+        component: PostCreate,
         meta: { requiresAuth: true },
     },
     {
@@ -44,8 +46,8 @@ const routes = [
         meta: { requiresAuth: true },
     },
     {
-        path: "/dashboard/edit/:id",
-        component: BlogEdit,
+        path: "/dashboard/post/edit/:id",
+        component: PostEdit,
         props: true,
         meta: { requiresAuth: true },
     },
@@ -63,22 +65,18 @@ const router = createRouter({
     routes,
 });
 
-
 // Global navigation guard
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth && !isAuthenticated()) {
-        
         toast.error("You must log in to access this page");
         // Redirect to login if not authenticated
         next({
-            name: 'login',
-            query: { redirect: to.fullPath }
+            name: "login",
+            query: { redirect: to.fullPath },
         });
-        
     } else {
         next(); // Proceed to the route
     }
 });
-
 
 export default router;

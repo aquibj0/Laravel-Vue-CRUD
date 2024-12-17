@@ -45,12 +45,9 @@ const createPost = async () => {
             'Authorization': 'Bearer ' + sessionStorage.getItem('auth_token')
         }
     },);
-
+    
     toast.success('Post Created');
-
     router.push(`/dashboard/post/${response.data.id}`)
-
-    // router.push('/');
 };
 
 onMounted(getUser(), state)
@@ -61,13 +58,11 @@ onMounted(getUser(), state)
 <template>
 
     <section class="bg-indigo-50">
-        <div class="container m-auto max-w-2xl py-8">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-8">
             <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
                 <form @submit.prevent="createPost">
 
-
-                    <h2 class="text-3xl text-center font-semibold mb-6">Add Job</h2>
-
+                    <h2 class="text-3xl text-center font-semibold mb-6">Add Post</h2>
 
                     <div class="mb-4">
                         <label class="block text-gray-700 font-bold mb-2">Title</label>
