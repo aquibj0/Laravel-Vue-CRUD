@@ -1,11 +1,22 @@
 <script setup>
-import { RouterLink, useRoute } from 'vue-router';
+import { ref } from 'vue';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import logo from '/public/assets/images/logo.png'
+
+const router = useRouter();
 
 const isActiveLink = (routePath) => {
     const route = useRoute();
     return route.path == routePath;
 }
+
+const isAuthenticated = ref(!!sessionStorage.getItem('auth_token'));
+
+const logout = () => {
+    sessionStorage.removeItem('auth_token');
+    isAuthenticated.value = false;
+    router.push('/');
+};
 
 </script>
 
@@ -27,12 +38,22 @@ const isActiveLink = (routePath) => {
                             <RouterLink to="/jobs"
                                 :class="[isActiveLink('/jobs') ? 'bg-indigo-900' : 'hover:bg-gray-900 hover:text-white', 'text-white rounded-md px-3 py-2']">
                                 Blogs</RouterLink>
-                            <RouterLink to="/login"
+                            <RouterLink 
+                                v-if="!isAuthenticated"
+                                to="/login"
                                 :class="[isActiveLink('/login') ? 'bg-indigo-900' : 'hover:bg-gray-900 hover:text-white', 'text-white rounded-md px-3 py-2']">
                                 Login</RouterLink>
-                            <RouterLink to="/register"
+                            <RouterLink 
+                                v-if="!isAuthenticated"
+                                to="/register"
                                 :class="[isActiveLink('/register') ? 'bg-indigo-900' : 'hover:bg-gray-900 hover:text-white', 'px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300']">
                                 Register</RouterLink>
+                            <button
+                                v-if="isAuthenticated"
+                                @click="logout"
+                                class="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                                Logout</button>
+
                         </div>
                     </div>
                 </div>
