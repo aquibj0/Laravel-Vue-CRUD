@@ -69,13 +69,12 @@ onMounted(
                 <h1 class="text-4xl font-semibold">My Posts</h1>
             </div>
             <div class="flex-initial">
-                <RouterLink to="/create"
+                <RouterLink to="/dashboard/create"
                     class="px-4 py-2 bg-indigo-500 text-white border-2 border-indigo-600 rounded-lg hover:bg-indigo-600 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
                     Create New Post
                 </RouterLink>
             </div>
         </div>
-
 
         <!-- Show Loading Spinner while loading is true -->
         <div v-if="state.isLoading" class="text-center gray-text-500">
@@ -86,7 +85,5 @@ onMounted(
         <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <PostCard v-for="post in state.posts" :key="post.id" :post="post" />
         </div>
-
-
     </div>
 </template>

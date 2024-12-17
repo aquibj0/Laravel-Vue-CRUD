@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import { isAuthenticated } from "../../auth";
+import { isAuthenticated } from "../../auth";
 import BlogIndex from "../components/BlogIndex.vue";
 import BlogCreate from "../components/BlogCreate.vue";
 import BlogEdit from "../components/BlogEdit.vue";
@@ -31,18 +31,32 @@ const routes = [
         path: "/dashboard",
         name: "dashboard",
         component: Dashboard,
-        meta: { requiresAuth: true}
+        meta: { requiresAuth: true },
     },
-    { path: "/create", component: BlogCreate },
-    { path: "/post/:id", component: BlogPost },
-    { path: "/edit/:id", component: BlogEdit, props: true },
-
+    {
+        path: "/dashboard/create",
+        component: BlogCreate,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/dashboard/post/:id",
+        component: BlogPost,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/dashboard/edit/:id",
+        component: BlogEdit,
+        props: true,
+        meta: { requiresAuth: true },
+    },
     {
         path: "/:catchAll(.*)",
         name: "not-found",
         component: NotFound,
     },
 ];
+
+const toast = useToast();
 
 const router = createRouter({
     history: createWebHistory(),
@@ -52,21 +66,15 @@ const router = createRouter({
 
 // Global navigation guard
 router.beforeEach((to, from, next) => {
-
-    const isAuthenticated = sessionStorage.getItem("auth_token"); // Check for auth token
-    const toast = useToast();
-
-    if (to.meta.requiresAuth && !isAuthenticated) {
-
+    if (to.meta.requiresAuth && !isAuthenticated()) {
+        
         toast.error("You must log in to access this page");
-
         // Redirect to login if not authenticated
         next({
             name: 'login',
             query: { redirect: to.fullPath }
         });
-
-        // next("/login");
+        
     } else {
         next(); // Proceed to the route
     }

@@ -12,12 +12,17 @@ class PostController extends Controller
     }
 
     public function store(Request $request){
+        
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required',
         ]);
 
-        return Post::create($request->all());
+        return Post::create([
+            'title' => $request['title'],
+            'content' => $request['content'],
+            'user_id' => $request['user_id']
+        ]);
     }
 
     public function show(Post $post){
