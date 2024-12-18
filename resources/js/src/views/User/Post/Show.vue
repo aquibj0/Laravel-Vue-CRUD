@@ -43,8 +43,17 @@ const fetchPost = async () => {
     try {
         const response = await axios.get(`/api/posts/${postId}`);
         state.post = response.data;
+        console.log(state.post);
+        
+        
     } catch (error) {
-        console.error('Error fetching post ', error);
+
+        if (error.response && error.response.status === 404) {
+            router.push('/404'); 
+        } else {
+            console.error(err);
+        }
+
     } finally {
         state.isLoading = false
     }
@@ -56,13 +65,21 @@ const deletePost = async () => {
         const confirm = window.confirm('Are you sure you want to delete');
         if (confirm) {
             await axios.delete(`/api/posts/${postId}`);
-            // toast.success('Job Deleted Successfully');
+            toast.success('Job Deleted Successfully');
             router.push('/');
         }
 
     } catch (error) {
+
+        console.log(error.response.staus);
+        
+
+
+        
+
+
         console.error('Error deleting Post', error);
-        toast.error('Post not deleted')
+        // toast.error('Post not deleted')
     }
 }
 

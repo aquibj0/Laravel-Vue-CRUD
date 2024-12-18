@@ -25,8 +25,12 @@ class PostController extends Controller
         ]);
     }
 
-    public function show(Post $post){
-        return $post;
+    public function show($id){
+
+        $post = Post::findOrFail($id);
+g
+        return response()->json($post);
+
     }
 
     public function update(Request $request, Post $post){

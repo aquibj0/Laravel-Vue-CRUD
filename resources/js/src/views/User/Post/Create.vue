@@ -3,6 +3,7 @@ import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
+import CKEditor from '../../../components/CKEditor.vue';
 
 const router = useRouter();
 
@@ -77,7 +78,9 @@ onMounted(getUser(), state)
                             placeholder="Add any job duties, expectations, requirements, etc"></textarea>
                     </div>
 
-
+                    <CKEditor/>
+                    
+                
                     <div>
                         <button
                             class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
@@ -85,8 +88,8 @@ onMounted(getUser(), state)
                             Submit
                         </button>
                     </div>
-                </form>
-            </div>
+            </form>
+        </div>
         </div>
     </section>
 </template>

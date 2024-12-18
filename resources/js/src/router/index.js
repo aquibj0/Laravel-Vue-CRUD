@@ -53,6 +53,13 @@ const routes = [
         name: "not-found",
         component: NotFound,
     },
+
+    // {
+    //     path: "/404",
+    //     name: "NotFound",
+    //     component: NotFound,
+    // },
+    // { path: "/:pathMatch(.*)*", redirect: "/404" }, // Catch-all route for undefined paths
 ];
 
 const toast = useToast();
