@@ -8,7 +8,8 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 const state = reactive({
     posts: [],
-    user: null
+    user: null,
+    isLoading: true
 });
 
 const getUserPost = async (userId) => {
@@ -23,6 +24,8 @@ const getUserPost = async (userId) => {
         
     } catch (error) {
         console.error(error)
+    } finally {
+        state.isLoading = false
     }
 }
 

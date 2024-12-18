@@ -1,5 +1,6 @@
 <script setup>
 import logo from '/public/assets/images/logo.png'
+import { login } from '../../../auth';
 import { useToast } from 'vue-toastification';
 import { reactive } from 'vue';
 import router from '../../router';
@@ -13,8 +14,6 @@ const form = reactive({
     remember_me: false
 });
 
-
-
 const handleLogin = async () => {    
     
     const user = {
@@ -25,10 +24,8 @@ const handleLogin = async () => {
 
     try {
         const response = await axios.post('/api/auth/login', user);
-        console.log(response.data);
-        console.log(response.data.accessToken);
-        sessionStorage.setItem('auth_token', response.data.accessToken);
-
+        const token = response.data.accessToken;
+        login(token)
         toast.success('Login Successfull')
         router.push(`/dashboard`);
     } catch (error) {
