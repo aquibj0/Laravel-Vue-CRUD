@@ -10,4 +10,4 @@ export function login(token) {
 export function logout() {
     sessionStorage.removeItem("auth_token");
     isAuthenticated.value = false; 
-}``
+}
