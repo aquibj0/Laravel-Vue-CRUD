@@ -71,7 +71,7 @@ const router = createRouter({
 
 // Global navigation guard
 router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth && !isAuthenticated) {
+    if (to.meta.requiresAuth && (isAuthenticated.value == false)) {
         toast.error("You must log in to access this page");
         // Redirect to login if not authenticated
         next({
