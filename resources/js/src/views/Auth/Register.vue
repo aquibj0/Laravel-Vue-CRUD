@@ -1,10 +1,12 @@
 <script setup>
 import logo from '/public/assets/images/logo.png';
+import { login } from '../../../auth';
 import { reactive } from 'vue';
 import router from '../../router';
 import { useToast } from 'vue-toastification';
 import axios from 'axios';
 import { RouterLink } from 'vue-router';
+
 
 
 const toast = useToast();
@@ -27,12 +29,14 @@ const handleForm = async () => {
     try {
         const response = await axios.post('/api/auth/register', newUser);
         // Set Access token. 
-        sessionStorage.setItem('auth_token', response.data.accessToken);
-
+        const token = response.data.accessToken;        
+        login(token)
         toast.success('Signup Successful');
         router.push('/dashboard');
     } catch (error) {
-
+        console.log(error);
+        toast.error('Something went wrong')
+        
     }
 
 };

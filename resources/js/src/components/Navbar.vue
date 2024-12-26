@@ -18,7 +18,7 @@ const handleLogout = () => {
 
 
 watch(isAuthenticated, (newValue) => {
-    console.log("Authentication state changed:", newValue);
+    console.log("Authentication state changed to:", newValue);
 });
 
 
